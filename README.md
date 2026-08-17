@@ -1,74 +1,109 @@
-# Fynco — Aplicação Fintech
+<div align="center">
 
-Aplicação de controle financeiro pessoal desenvolvida com Next.js (frontend) e Spring Boot (backend), integrada ao banco de dados Oracle da FIAP.
+# 💰 Fynco
+
+**Controle financeiro pessoal — do cadastro de contas às metas de investimento.**
+
+![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-6DB33F?logo=springboot&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Oracle](https://img.shields.io/badge/Oracle-Database-F80000?logo=oracle&logoColor=white)
+
+</div>
 
 ---
 
-## Tecnologias utilizadas
+## 📌 Sobre o projeto
 
-- **Frontend:** Next.js 16, TypeScript, Tailwind CSS
-- **Backend:** Java, Spring Boot, Spring Data JPA
-- **Banco de dados:** Oracle (instância FIAP)
+Fynco é uma aplicação full stack de finanças pessoais, com API REST em **Spring Boot** e frontend em **Next.js**, persistindo dados em um banco **Oracle**. Permite cadastrar contas, cartões, categorias, receitas, despesas, investimentos e metas financeiras, acompanhando tudo em um painel único.
 
----
+O projeto nasceu como trabalho da disciplina de ADS na FIAP (Grupo 63) e hoje também compõe meu portfólio pessoal como desenvolvedor.
 
-## Como inicializar o projeto
+## ✨ Funcionalidades
+
+- 🔐 Cadastro e login de usuário
+- 🏦 Gestão de contas e cartões
+- 🏷️ Categorias personalizadas
+- 📈 Lançamento de receitas e despesas
+- 💹 Acompanhamento de investimentos
+- 🎯 Definição de metas financeiras
+
+## 🛠️ Tecnologias
+
+| Camada | Stack |
+|---|---|
+| **Frontend** | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| **Backend** | Java 21, Spring Boot 4, Spring Data JPA |
+| **Banco de dados** | Oracle (instância acadêmica FIAP) |
+
+## 🏗️ Arquitetura
+
+```
+fynco-frontend (Next.js)
+        │
+        │  API Routes (proxy)
+        ▼
+ fintech-api (Spring Boot REST)
+        │
+        ▼
+   Oracle Database
+```
+
+## 🚀 Como executar localmente
 
 ### Pré-requisitos
 
 - Node.js 18+
-- Java 17+
+- Java 21+
 - Maven
-- Acesso à instância Oracle da FIAP
-
----
+- Acesso a uma instância Oracle (ambiente acadêmico FIAP ou local)
 
 ### 1. Backend (Spring Boot)
 
-Abra o projeto `fintech-api` no IntelliJ IDEA.
+```bash
+cd fintech-api
+cp src/main/resources/application.properties.example src/main/resources/application.properties
+```
 
-Verifique o arquivo `src/main/resources/application.properties`:
+Edite o `application.properties` recém-criado com suas credenciais:
 
 ```properties
-spring.datasource.url=jdbc:oracle:thin:@//oracle.fiap.com.br:1521/ORCL
 spring.datasource.username=SEU_RM
 spring.datasource.password=SUA_SENHA
 ```
 
-Execute a aplicação clicando no botão **Run** ou pressione `Shift + F10`.
+Depois, rode pela IDE (IntelliJ) ou via terminal:
 
-O backend estará disponível em: `http://localhost:8080`
+```bash
+./mvnw spring-boot:run
+```
 
----
+API disponível em `http://localhost:8080`.
 
 ### 2. Frontend (Next.js)
 
-Abra o projeto `fynco-frontend` no terminal e execute:
-
 ```bash
+cd fynco-frontend
 npm install
 npm run dev
 ```
 
-O frontend estará disponível em: `http://localhost:3000`
+Aplicação disponível em `http://localhost:3000`.
 
----
-
-## Dados de autenticação do usuário de teste
+### 🔑 Usuário de teste
 
 | Campo | Valor |
 |---|---|
-| Email | pedro@fintech.com |
-| Senha | 123456 |
+| E-mail | `pedro@fintech.com` |
+| Senha | `123456` |
 
-> Caso o usuário não exista no banco, acesse `http://localhost:3000/cadastro` para criar uma nova conta. Ou acesse pela tela o cadastro de usuário.
+> Se o usuário não existir no seu banco, crie uma nova conta em `/cadastro`.
 
----
+## 📁 Estrutura do projeto
 
-## Estrutura do projeto
-
-### Backend
-
+```
 fintech-api/
 ├── model/          Entidades JPA
 ├── repository/     Spring Data JPA
@@ -77,25 +112,22 @@ fintech-api/
 ├── exception/      Tratamento de erros
 └── util/           Utilitários (hash SHA-256)
 
-### Frontend
-
 fynco-frontend/
-├── src/
-│   ├── app/
-│   │   ├── (interno)/   Páginas autenticadas
-│   │   ├── api/         API Routes (proxy)
-│   │   ├── login/       Página de login
-│   │   └── cadastro/    Página de cadastro
-│   ├── components/      Header e Sidebar
-│   ├── interfaces/      Tipagem TypeScript
-│   └── utils/           Funções utilitárias
+└── src/
+    ├── app/
+    │   ├── (interno)/   Páginas autenticadas
+    │   ├── api/         API Routes (proxy)
+    │   ├── login/       Página de login
+    │   └── cadastro/    Página de cadastro
+    ├── components/      Header e Sidebar
+    ├── interfaces/      Tipagem TypeScript
+    └── utils/           Funções utilitárias
+```
 
----
-
-## Entidades implementadas
+## ✅ Entidades implementadas
 
 | Entidade | Backend | Frontend |
-|---|---|---|
+|---|:---:|:---:|
 | Usuário | ✅ | ✅ |
 | Categoria | ✅ | ✅ |
 | Conta | ✅ | ✅ |
@@ -105,8 +137,18 @@ fynco-frontend/
 | Investimento | ✅ | ✅ |
 | Meta Financeira | ✅ | ✅ |
 
----
+## 🗺️ Próximos passos
 
-## Integrantes do grupo
+- [ ] Testes automatizados (JUnit / Jest)
+- [ ] Dashboard com gráficos de gastos por categoria
+- [ ] Deploy em ambiente cloud
+
+## 👥 Integrantes
 
 - Pedro Henrique Martins de Souza — RM568089
+
+---
+
+<div align="center">
+<sub>Projeto acadêmico desenvolvido na FIAP — Análise e Desenvolvimento de Sistemas</sub>
+</div>
